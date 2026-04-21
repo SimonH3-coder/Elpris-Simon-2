@@ -1,5 +1,11 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { findTimeWindow} from "../utils/findTimeWindow"
+import { formatTime } from "../utils/formatTime"
+
+
 export function Now() {
+
+    const [nowTime, setNowTime] = useState(undefined)
 
     // Vi skal hente data
     // Vise data for den pågældende time
@@ -25,25 +31,9 @@ const date = new Date()
     // indenfor for det tidpunkt vi har lige nu.
     // Eks. er  den 20.32 så finder den objektet mellem 20-21
 
-    function findTimeWindow(inputDateStart, inputDateEnd) {
-        const timeStart = new  Date(inputDateStart) 
-        const timeEnd = new Date(inputDateEnd)
-        const localTime = new Date()
+  
 
-        console.log(localTime.getHours());
-        
-        if (localTime.getHours() >= timeStart.getHours()
-        && localTime.getHours() <= timeEnd.getHours()) {
-    console.log("Nu ER DEN INDEN FOR TIDEN");
-        }
     
-
-         
-        console.log( "Start", timeStart);
-        console.log("End", timeEnd);
-        
-
-    }
 
     console.log(day);
     
@@ -57,10 +47,19 @@ const date = new Date()
         async function getData() {
             try {
                 const res = await fetch(`https://www.elprisenligenu.dk/api/v1/prices/${year}/${month}-${day}_${priceClass}.json`)
+                if(!res.ok)
+                    throw new Error('Failed to Fetch')
+
                 const data = await res.json()
-                findTimeWindow(data[13].time_start, data[13].time_end)
+                const nowData = data.filter((item ) => findTimeWindow(item.time_start, item.time_end))
+                if (nowData) {
+                    setNowTime(nowData[0])
+                }
+                
 
                 console.log(" Vores Data: ", data);
+                console.log(("Single Data", nowData));
+                
                 
 
             } 
@@ -73,11 +72,12 @@ const date = new Date()
     []);
     return (
         <section>
+        
         <h1>Elprisen lige nu</h1>
         <div>
-            <h3>0.242kr pr. kWh</h3>
+            <h3>{nowTime?.DKK_per_kWh}kr pr. kWh</h3>
         </div>
-        <h4>Mellem 22:00-23:00</h4>
+        <h4>Mellem {formatTime(nowTime?.time_start)}-{formatTime(nowTime?.time_end)}</h4>
         </section>
         
 
