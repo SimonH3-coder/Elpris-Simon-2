@@ -19,13 +19,15 @@ body {
 footer {
   margin-top: auto;
   background-color: #201E1E;
-
-}
-
-h1, h2, h3, h4, h5, h6, p, b, l, a {
   color: #EBEBEB;
-  text-decoration: none;
-  font-family: Roboto, sans-serif;
+  text-align: center;
+
+  span {
+    color: #55EC20;
+    font-size: bold;
+  }
 
 }
+
+
 

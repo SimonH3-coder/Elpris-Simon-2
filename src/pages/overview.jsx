@@ -1,8 +1,85 @@
+import { useEffect, useState } from "react"
+import { findTimeWindow} from "../utils/findTimeWindow"
+import { formatTime } from "../utils/formatTime"
+import gear from '../assets/gear-solid.svg'
 
 
 export function Overview() {
+
+const [overviewData, setOverviewData] = useState(undefined)
+
+// Vi skal hente data
+// Vise data for den pågældende time
+// Vise time
+
+const date = new Date()
+    const year = date.getFullYear()
+    // Træk år ud fra dataobjektet 0-11
+    let month = date.getMonth() + 1
+     if (month < 10) {
+        month = '0' + month
+    }
+
+    // 1-31
+    //Hvis dag er mindre end to cifre, så plus 0 på day.
+    let day = date.getDate()
+    if (day < 10) {
+         day = '0' + day
+    }
+
+    // let price = date.getPrice()
+    // if (price < 0.142) {
+    //     price = 'Laveste Pris' + price
+    // }
+
+    // let highestPrice = date.getHighestPrice()
+    // if (highestPrice > 0.742) {
+    //     highestPrice = 'Højeste Pris' + highestPrice
+    // }
+
+
+    // Vi skal lave en funktion der kan finde et object som ligger
+    // indenfor for det tidpunkt vi har lige nu.
+    // Eks. er  den 20.32 så finder den objektet mellem 20-21
+
+  
+    console.log(day);
+    
+
+    const priceClass = 'DK1'
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const res = await fetch(`https://www.elprisenligenu.dk/api/v1/prices/${year}/${month}-${day}_${priceClass}.json`)
+                if(!res.ok)
+                throw new Error('Failed to Fetch')
+
+                const data = await res.json()
+               
+                setOverviewData(data)
+                console.log("Vores Data:", data);
+                
+                
+                
+
+
+            }
+            catch (err) {
+                console.error(err)
+            }
+        }
+        getData()
+    }, [])
+
+
+
+
+
+
     return (
         <section>
+        <img src={gear} alt="Settings" />
         <h1>Overview page</h1>
         <div>
             <h4>0.142 KR</h4>
@@ -14,7 +91,13 @@ export function Overview() {
             <h5>Pr. kWh</h5>
         </div>
         <h3>Højeste Pris</h3>
-        <h4>kl. 19.00 0.524 kr </h4>
+        {overviewData?.map((item) => {
+            return (
+                <div key={item.time_start}>
+                    <h4>kl.{formatTime(item.time_start)} {item.DKK_per_kWh} kr</h4>
+                </div>
+            )
+        }) }
         </section>
         
     )

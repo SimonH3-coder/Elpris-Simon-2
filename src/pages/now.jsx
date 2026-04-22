@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { findTimeWindow} from "../utils/findTimeWindow"
 import { formatTime } from "../utils/formatTime"
+import gear from '../assets/gear-solid.svg'
+import style from './now.module.scss'
 
 
 export function Now() {
@@ -71,13 +73,13 @@ const date = new Date()
     }, 
     []);
     return (
-        <section>
-        
+        <section className={style.nowContainer}>
+        <img src={gear} alt="Settings" />
         <h1>Elprisen lige nu</h1>
         <div>
-            <h3>{nowTime?.DKK_per_kWh}kr pr. kWh</h3>
+            <p>{nowTime?.DKK_per_kWh}kr pr. kWh</p>
         </div>
-        <h4>Mellem {formatTime(nowTime?.time_start)}-{formatTime(nowTime?.time_end)}</h4>
+        <h4>{formatTime(nowTime?.time_start)}-{formatTime(nowTime?.time_end)}</h4>
         </section>
         
 

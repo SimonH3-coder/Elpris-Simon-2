@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react"
+import { findTimeWindow} from "../utils/findTimeWindow"
+import { formatTime } from "../utils/formatTime"
+import gear from '../assets/gear-solid.svg'
+import calendar from '../assets/Calendar.svg'
 
 export function History() {
     const [History, setHistory] = useState(undefined)
@@ -27,9 +31,11 @@ export function History() {
     // indenfor for det tidpunkt vi har lige nu.
     // Eks. så finder den objektet mellem 12-03
 
+   
+
     console.log(day, month, year);
 
-    const priceClass = 'DK2'
+    const priceClass = 'DK1'
 
     useEffect(() => {
         async function getData() {
@@ -38,13 +44,10 @@ export function History() {
                 if(!res.ok)
                     throw new Error('Failed to Fetch')
                 const data = await res.json()
-                const nowData2 = data.filter((item ) => findTimeWindow(item.time_start, item.time_end))
-                if (nowData2) {
-                    setHistory(nowData2[0])
-                }
+                setHistory(data)
             
             console.log("Vores Data: ", data);
-            console.log("Single Data: ", nowData2);
+           
             }
             catch (err) {
                 console.error(err)
@@ -56,12 +59,28 @@ export function History() {
 
     return (
         <section>
+        <img src={gear} alt="Settings" />
         
         <h1>History page</h1>
         <div>
+            <label htmlFor={date}>
+            
+            <input type={'date'} name={'date'}  img={calendar}/>
+
+
+            </label>
+           
             <h3>ELPRISERNE D. 14-10-2023 </h3>
         </div>
-        <h4>kl. 12:00 0.524kr</h4>
+       
+        {History?.map((item) => {
+            return (
+                <div key={item.time_start}>
+                    <h4>kl.{formatTime(item.time_start)} {item.DKK_per_kWh} kr</h4>
+                </div>
+            )
+        }) }
+       
         </section>
     )
 }

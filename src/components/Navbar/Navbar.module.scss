@@ -4,6 +4,18 @@
     display: flex;
     flex-direction: row;
     gap: 4px;
+
+    .navLink {
+        color: aqua;
+        text-decoration: none;
+    }
+
+    .active {
+        color: #55EC20;
+    }
+  
+    
+   
     
 
     img {
@@ -18,5 +30,8 @@
         align-items: center;
         justify-content: center;
         padding: 8px;
+        text-decoration: none;
+        color: #EBEBEB;
+        
     }
 }
