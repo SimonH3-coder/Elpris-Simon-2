@@ -3,6 +3,7 @@ import { findTimeWindow} from "../utils/findTimeWindow"
 import { formatTime } from "../utils/formatTime"
 import gear from '../assets/gear-solid.svg'
 import calendar from '../assets/Calendar.svg'
+import style from './history.module.scss'
 
 export function History() {
     const [History, setHistory] = useState(undefined)
@@ -58,14 +59,15 @@ export function History() {
     
 
     return (
-        <section>
+        <section className={style.historyContainer}>
         <img src={gear} alt="Settings" />
         
         <h1>History page</h1>
         <div>
             <label htmlFor={date}>
             
-            <input type={'date'} name={'date'}  img={calendar}/>
+            <input type={'date'} name={'date'}/>
+            <img src={calendar} alt="Calendar" />
 
 
             </label>

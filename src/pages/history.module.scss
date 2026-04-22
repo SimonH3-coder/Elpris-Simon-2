@@ -1,0 +1,34 @@
+.historyContainer {
+    display: flex;
+    flex-direction: column;
+
+    img {width: 30px;
+        height: 30px;
+        justify-self: flex-end;
+        align-self: flex-end;
+        margin-right: 3rem;
+
+    }
+
+        h1 {
+        color: #EBEBEB;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    label > input {
+        text-align: center;
+    }
+
+
+    h3 {
+        color: #EBEBEB;
+        text-align: center;
+
+    }
+    h4 {
+        color: #EBEBEB;
+        text-align: center;
+    }
+}
