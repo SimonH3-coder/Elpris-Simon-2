@@ -42,6 +42,10 @@ const date = new Date()
 
     const priceClass = 'DK1'
 
+   
+
+
+
 
     useEffect(() => { 
         
@@ -75,10 +79,16 @@ const date = new Date()
     return (
         <section className={style.nowContainer}>
         <img src={gear} alt="Settings" />
-        <h1>Elprisen lige nu</h1>
-        <div>
-            <p>{nowTime?.DKK_per_kWh}kr pr. kWh</p>
-        </div>
+        <h1>ELPRISEN LIGE NU</h1>
+        <main>
+                <div className={style.circleone}>
+                    <div className={style.circletwo}>
+                        <div className={style.circlethree}>
+                            <p>{nowTime?.DKK_per_kWh}kr pr. kWh</p>
+                        </div>
+                    </div>
+                </div>
+        </main>
         <h4>{formatTime(nowTime?.time_start)}-{formatTime(nowTime?.time_end)}</h4>
         </section>
         

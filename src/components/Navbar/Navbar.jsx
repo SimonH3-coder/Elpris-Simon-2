@@ -8,9 +8,9 @@ export function Navbar() {
         <nav className={style.navStyling}>
             <img src={navIcon} alt="Navigation icon" />
             <div>
-                <NavLink to="/overview" className={linkClassName}>Oversigt</NavLink>
-                <NavLink to="/now" className={linkClassName}>Lige nu</NavLink>
-                <NavLink to="/history" className={linkClassName}>Historik</NavLink>
+                <NavLink to="/overview" className={linkClassName}>OVERSIGT</NavLink>
+                <NavLink to="/now" className={linkClassName}>LiGE NU</NavLink>
+                <NavLink to="/history" className={linkClassName}>HISTORIK</NavLink>
             </div>
 
         </nav>

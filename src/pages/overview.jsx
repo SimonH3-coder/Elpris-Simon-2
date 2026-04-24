@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { findTimeWindow} from "../utils/findTimeWindow"
 import { formatTime } from "../utils/formatTime"
 import gear from '../assets/gear-solid.svg'
+import style from './overview.module.scss'
 
 
 export function Overview() {
@@ -27,15 +28,7 @@ const date = new Date()
          day = '0' + day
     }
 
-    // let price = date.getPrice()
-    // if (price < 0.142) {
-    //     price = 'Laveste Pris' + price
-    // }
-
-    // let highestPrice = date.getHighestPrice()
-    // if (highestPrice > 0.742) {
-    //     highestPrice = 'Højeste Pris' + highestPrice
-    // }
+   
 
 
     // Vi skal lave en funktion der kan finde et object som ligger
@@ -78,23 +71,32 @@ const date = new Date()
 
 
     return (
-        <section>
+        <section className={style.overviewContainer}>
         <img src={gear} alt="Settings" />
-        <h1>Overview page</h1>
-        <div>
+        <h1>OVERSIGT</h1>
+        <div className={style.circleblack}>
+        <div className= {style.circlegreen}>
+           
             <h4>0.142 KR</h4>
             <h5>Pr. kWh</h5>
         </div>
-        <h3>Laveste Pris</h3>
-        <div>
+        </div>
+
+    
+        
+        <div className={style.circleblack2}>
+        <div className={style.circlegreen2}>
+           
             <h4>0.172 KR</h4>
             <h5>Pr. kWh</h5>
         </div>
+        </div>
+        <h3>Laveste Pris</h3> 
         <h3>Højeste Pris</h3>
         {overviewData?.map((item) => {
             return (
                 <div key={item.time_start}>
-                    <h4>kl.{formatTime(item.time_start)} {item.DKK_per_kWh} kr</h4>
+                    <p>kl.{formatTime(item.time_start)} {item.DKK_per_kWh} kr</p>
                 </div>
             )
         }) }

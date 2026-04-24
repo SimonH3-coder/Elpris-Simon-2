@@ -38,6 +38,10 @@ export function History() {
 
     const priceClass = 'DK1'
 
+   
+
+  
+
     useEffect(() => {
         async function getData() {
             try {
@@ -62,7 +66,7 @@ export function History() {
         <section className={style.historyContainer}>
         <img src={gear} alt="Settings" />
         
-        <h1>History page</h1>
+        <h1>HISTORIK</h1>
         <div>
             <label htmlFor={date}>
             
